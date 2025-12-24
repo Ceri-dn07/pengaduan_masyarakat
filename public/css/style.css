@@ -1,0 +1,15 @@
+.dropdown-menu {
+    background-color: #f5f5f5; /* Warna latar belakang */
+    border-radius: 10px;       /* Sudut membulat */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+}
+
+.btn-success {
+    background-color: #4caf50; /* Warna hijau tombol */
+    border: none;             /* Hilangkan border */
+    font-weight: bold;        /* Teks tebal */
+}
+
+.btn-success:hover {
+    background-color: #45a049; /* Warna saat hover */
+}
