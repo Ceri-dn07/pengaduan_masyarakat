@@ -2,28 +2,6 @@
 
 @section('content')
 
-<!-- <style>
-    .table-responsive{
-        width: 100%;
-        overflow-x: auto;
-    }
-    .table{
-        width: 100%;
-        /* max-width: 100%; Membatasi lebar maksimal */
-        /* table-layout: fixed; Membuat kolom memiliki lebar tetap */
-        text-align: center; /* Mengatur teks menjadi di tengah */
-        vertical-align: middle; /* Pastikan juga sejajar secara vertikal */
-    }
-
-    .table td,
-    .table th {
-        /* word-wrap: break-word; Memastikan teks tidak melampaui kolom */
-        /* white-space: normal; Mengizinkan teks terbungkus */
-    }
-
-    
-</style> -->
-
 <div class="container-fluid pt-5">
 <form action="/user/pengaduan" class="mt-3" method="GET">
     <div class="row ">
@@ -45,7 +23,8 @@
             <input type="date" id="end_date" name="end_date" value="{{ request('end_date') }}" class="form-control" >
         </div>
         <div class="col-md-3 d-flex align-items-end">
-            <button type="submit" class="btn btn-info" style="width: 100%;">Cari Pengaduan</button>
+            <button type="submit" class="btn btn-info w-100 mr-3">Cari Pengaduan</button>
+            <a href="/user/pengaduan" class="btn btn-secondary ms-2 w-100">Reset</a>
         </div>
     </div>
 </form>
@@ -134,9 +113,6 @@
                         @else
                             <span class="badge bg-secondary">Tidak Diketahui</span>
                         @endif
-                    
-
-                    
                     </td>
                 </tr>
                 @endforeach
@@ -153,7 +129,7 @@
                 </div>
 
                 <form id="pengaduanForm" action="/user/pengaduan/tambah" method="post">
-                    @csrf <!-- Tambahkan CSRF token -->
+                    @csrf
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="tgl_pengaduan">Tanggal Pengaduan</label>
@@ -177,28 +153,19 @@
             </div>
         </div>
     </div>
-    <!-- Akhir Modal Form Tambah Pengaduan -->
 
-    
-    <!--awal pagination-->
     {{ $pengaduan->links('pagination::bootstrap-5') }}
 
-    <!--akhir pagination-->
-
     <script>
-        // Mengisi input tanggal dengan tanggal hari ini
         document.getElementById('tgl_pengaduan').value = new Date().toISOString().split('T')[0];
 
-        // Fungsi Button
         function submitFormWithNotification() {
-            // Validasi manual (opsional, karena `required` sudah cukup)
             const form = document.getElementById('pengaduanForm');
             if (!form.checkValidity()) {
                 form.reportValidity();
                 return;
             }
 
-             // Tampilkan notifikasi SweetAlert2
             Swal.fire({
                 title: 'Sukses!',
                 text: 'Data telah berhasiil ditambahkan',
@@ -206,20 +173,16 @@
                 confirmButtonText: 'OK',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Kirim form dengan JavaScript
                     const formData = new FormData(form);
 
-                    // Kirim menggunakan Fetch API
                     fetch(form.action, {
                         method: 'POST',
                         body: formData,
                     })
                     .then(response => {
                         if (response.ok) {
-                            // Arahkan ke halaman cetak PDF
                             window.location.href = '/user/pengaduan';
                         } else {
-                            // Tampilkan pesan error jika gagal
                             Swal.fire({
                                 title: 'Error!',
                                 text: 'Terjadi kesalahan saat memproses pesanan.',
@@ -232,7 +195,6 @@
                         }
                     })
                     .catch(error => {
-                        // Tangani error jaringan
                         Swal.fire({
                             title: 'Error!',
                             text: 'Tidak dapat menghubungi server.',

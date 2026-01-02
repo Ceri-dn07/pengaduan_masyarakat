@@ -6,10 +6,6 @@
         <div class="col-md-6">
             <h1 class="display-4" style="font-weight: bold; font-size: 50px;">Layanan Pengaduan Masyarakat</h1>
             <p class="lead">Sampaikan keluhan Anda dengan mudah dan cepat melalui platform kami.</p>
-            <!-- <div class="mt-4">
-                <a href="{{ route('register') }}" class="btn btn-light btn-lg me-2">Daftar</a>
-                <a href="{{ route('login') }}" class="btn btn-outline-light btn-lg">Masuk</a>
-            </div> -->
         </div>
         <div class="col-md-6">
             <img src="{{ asset('images/complaint.png') }}" alt="Illustration" class="img-fluid">
@@ -88,13 +84,5 @@
         </div>
     </div>
 </div>
-
-<!-- <script>
-    window.onload = function() {
-        const colors = ['#007bff', '#00c6ff', '#28a745', '#ffc107', '#dc3545'];
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
-        document.querySelector('.bg-primary').style.backgroundColor = randomColor;
-    };
-</script> -->
 
 @endsection
