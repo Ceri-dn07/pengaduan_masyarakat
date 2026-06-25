@@ -24,6 +24,6 @@ class Masyarakat extends Authenticatable
 
     public function pengaduan()
     {
-        return $this->hasOne(Pengaduan::class, 'nik', 'nik');
+        return $this->hasMany(Pengaduan::class, 'nik', 'nik');
     }
 }

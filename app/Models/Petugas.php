@@ -25,6 +25,6 @@ class Petugas extends Authenticatable
 
     public function tanggapan()
     {
-        return $this->hasOne(Tanggapan::class, 'id_petugas', 'id_petugas');
+        return $this->hasMany(Tanggapan::class, 'id_petugas', 'id_petugas');
     }
 }
