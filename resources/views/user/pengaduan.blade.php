@@ -31,95 +31,110 @@
 <a href="#" class="btn btn-primary mt-3 mb-3 mr-5 " style="width: 24%;" data-toggle="modal" data-target="#modalPengaduan" >
     <i class="fas fa-plus-square-o"></i> Tambah Pengaduan
 </a>
+    <table class="table table-striped table-responsive">
+        <thead>
+            <tr>
+                <th class="w-auto text-nowrap">No.</th>
+                <th class="w-auto text-nowrap">Tanggal Pengaduan</th>
+                <th>Isi Laporan</th>
+                <th>Foto</th>
+                <th>Status</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        @if($pengaduan->isNotEmpty())
+        <tbody class="justify-content-center">
+            @foreach($pengaduan as $index => $p)
+            <tr>
+                <td class="w-auto text-nowrap">{{ $index + 1}}</td>
+                <td class="w-auto text-nowrap">{{ $p->tgl_pengaduan }}</td>
+                <td class="text-truncate w-25">
+                    @if(strlen($p->isi_laporan) > 50)
+                        <span>{{ substr($p->isi_laporan, 0, 50) }}</span>
+                        <span id="teks-sisa" style="display: none">{{ substr($p->isi_laporan, 50)}}</span>
+                        <span style="color: #0095f6; cursor: pointer" id="lengkap" onClick="toggleTeks(this)" href="">...Selengkapnya</span>
+                    @else
+                        <span>{{ $p->isi_laporan }}</span>
+                    @endif
+                </td>
+                <td>@if($p->foto)
+                <a href="{{ asset('foto_pengaduan') }}/{{($p->foto) }}" target="_blank"><img src="{{ asset('foto_pengaduan/' . $p->foto) }}" alt="Foto Pengaduan" style="width: 50px; height: 50px;"></a>
+                    @else
+                        Tidak ada bukti
+                    @endif
+                </td>
+                <td>
+                    @if ($p->status == '0')
+                        <span class="badge bg-secondary text-white">Belum diterima</span>
+                    @elseif ($p->status == 'proses')
+                        <span class="badge bg-warning text-dark">Diproses</span>
+                    @elseif ($p->status == 'selesai')
+                        <span class="badge bg-success">Selesai</span>
+                    @else
+                        <span class="badge bg-secondary">Tidak Diketahui</span>
+                    @endif
+                </td>
+                <td>
+                    @if ($p->status == '0')
+                    <form action="{{ route('user.pengaduan.hapus', $p->id_pengaduan) }}" method="POST" style="display:inline;" id="verifikasiForm{{$p->id_pengaduan}}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" class="btn btn-danger btn-sm" title="Verifikasi" id="verifikasiBtn{{$p->id_pengaduan}}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </form>
+                    @elseif ($p->status == 'proses')
+                    <span class="badge bg-warning text-dark">Menunggu...</span>
+                    @elseif ($p->status == 'selesai')
+                    <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalTampilTanggapan{{$p->id_pengaduan}}" data-placement="top" title="Lihat Tanggapan">
+                        <i class="fas fa-eye"></i>
+                    </a>
 
-<p>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th class="w-auto text-nowrap">No.</th>
-                    <th class="w-auto text-nowrap">Tanggal Pengaduan</th>
-                    <th>Isi Laporan</th>
-                    <th>Foto</th>
-                    <th>Status</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody class="justify-content-center">
-                @foreach($pengaduan as $index => $p)
-                <tr>
-                    <td class="w-auto text-nowrap">{{ $index + 1}}</td>
-                    <td class="w-auto text-nowrap">{{ $p->tgl_pengaduan }}</td>
-                    <td class="text-truncate w-25">{{ $p->isi_laporan }}</td>
-                    <td>@if($p->foto)
-                    <a href="{{ asset('foto_pengaduan') }}/{{($p->foto) }}" target="_blank"><img src="{{ asset('foto_pengaduan/' . $p->foto) }}" alt="Foto Pengaduan" style="width: 50px; height: 50px;"></a>
-                        @else
-                            Tidak ada bukti
-                        @endif
-                    </td>
-                    <td>
-                        @if ($p->status == '0')
-                            <span class="badge bg-secondary">Belum diterima</span>
-                        @elseif ($p->status == 'proses')
-                            <span class="badge bg-warning text-dark">Diproses</span>
-                        @elseif ($p->status == 'selesai')
-                            <span class="badge bg-success">Selesai</span>
-                        @else
-                            <span class="badge bg-secondary">Tidak Diketahui</span>
-                        @endif
-                    </td>
-                    <td>
-                        @if ($p->status == '0')
-                        <span class="badge bg-secondary">Menunggu...</span>
-                        @elseif ($p->status == 'proses')
-                        <span class="badge bg-warning text-dark">Menunggu...</span>
-                        @elseif ($p->status == 'selesai')
-                        <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalTampilTanggapan{{$p->id_pengaduan}}" data-placement="top" title="Lihat Tanggapan">
-                            <i class="fas fa-eye"></i>
-                        </a>
-
-                        <!-- Modal Lihat Tanggapan -->
-                        <div class="modal fade" id="modalTampilTanggapan{{$p->id_pengaduan}}" tabindex="-1" aria-labelledby="modalTampilTanggapanLabel{{$p->id_pengaduan}}" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="modalTampilTanggapanLabel{{$p->id_pengaduan}}">Detail Tanggapan</h5>
-                                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <!-- Modal Lihat Tanggapan -->
+                    <div class="modal fade" id="modalTampilTanggapan{{$p->id_pengaduan}}" tabindex="-1" aria-labelledby="modalTampilTanggapanLabel{{$p->id_pengaduan}}" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalTampilTanggapanLabel{{$p->id_pengaduan}}">Detail Tanggapan</h5>
+                                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <strong>Dari:</strong>
+                                        <p>{{ $p->tanggapan->petugas->nama_petugas ?? 'Belum Ada' }}</p>
                                     </div>
-                                    <div class="modal-body">
-                                        <div class="mb-3">
-                                            <strong>Dari:</strong>
-                                            <p>{{ $p->tanggapan->petugas->nama_petugas ?? 'Belum Ada' }}</p>
-                                        </div>
-                                        <div class="mb-3">
-                                            <strong>Kepada:</strong>
-                                            <p>{{ $p->masyarakat->nama ?? 'Tidak Diketahui' }}</p>
-                                        </div>
-                                        <div class="mb-3">
-                                            <strong>Tanggal Tanggapan:</strong>
-                                            <p>{{ $p->tanggapan->tgl_tanggapan ?? '-' }}</p>
-                                        </div>
-                                        <div class="mb-3">
-                                            <strong>Isi Tanggapan:</strong>
-                                            <p>{{ $p->tanggapan->tanggapan ?? 'Belum Ditanggapi' }}</p>
-                                        </div>
+                                    <div class="mb-3">
+                                        <strong>Kepada:</strong>
+                                        <p>{{ $p->masyarakat->nama ?? 'Tidak Diketahui' }}</p>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                    <div class="mb-3">
+                                        <strong>Tanggal Tanggapan:</strong>
+                                        <p>{{ $p->tanggapan->tgl_tanggapan ?? '-' }}</p>
                                     </div>
+                                    <div class="mb-3">
+                                        <strong>Isi Tanggapan:</strong>
+                                        <p>{{ $p->tanggapan->tanggapan ?? 'Belum Ditanggapi' }}</p>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                                 </div>
                             </div>
                         </div>
-                        @else
-                            <span class="badge bg-secondary">Tidak Diketahui</span>
-                        @endif
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-
+                    </div>
+                    @else
+                        <span class="badge bg-secondary">Tidak Diketahui</span>
+                    @endif
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+        @else
+            <div class="alert alert-info text-center">
+                <strong>Tidak ada data pengaduan</strong>
+            </div>
+        @endif
+    </table>
     <!-- Modal Form Tambah Pengaduan -->
     <div class="modal fade" id="modalPengaduan" tabindex="-1" role="dialog" aria-labelledby="modalPengaduanLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -207,6 +222,47 @@
                     });
                 }
             });
+        }
+
+        document.querySelectorAll('[id^="verifikasiBtn"]').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const formId = 'verifikasiForm' + btn.id.replace('verifikasiBtn', '');
+
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Anda akan menghapus pengaduan ini.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Hapus',
+                    cancelButtonText: 'Batal',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById(formId).submit();
+                    } else {
+                        Swal.fire(
+                            'Dibatalkan',
+                            'Pengaduan tidak jadi dihapus.',
+                            'info'
+                        );
+                    }
+                });
+            });
+        });
+
+        function toggleTeks(tombol) {
+            var lengkap = tombol.parentElement;
+            var teksSisa = lengkap.querySelector('#teks-sisa');
+
+            if(teksSisa.style.display === "none") {
+                teksSisa.style.display = "inline";
+                tombol.innerText = "Sembunyikan";
+            } else {
+                teksSisa.style.display = "none";
+                tombol.innerText =" ...Selengkapnya"
+            }
         }
     </script>
     

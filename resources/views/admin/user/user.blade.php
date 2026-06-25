@@ -12,7 +12,6 @@
                     <th>NIK</th>
                     <th>Nama</th>
                     <th>Username</th>
-                    <th>Password</th>
                     <th>Telp</th>
                 </tr>
             </thead>
@@ -23,12 +22,12 @@
                     <td>{{ $u->nik }}</td>
                     <td>{{ $u->nama }}</td>
                     <td>{{ $u->username }}</td>
-                    <td>{{ $u->password }}</td>
                     <td>{{ $u->telp }}</td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
+        {{ $user->links('pagination::bootstrap-5') }}
     </div>
 </div>
 @endsection

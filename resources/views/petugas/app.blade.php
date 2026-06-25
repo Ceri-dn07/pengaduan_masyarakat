@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HaloWarga-Petugas</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('images/icon_complaint.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/logo.png') }}">
     <link type="text/css" href="{{asset('bs')}}/css/bootstrap.min.css" rel="stylesheet"> 
     <link type="text/css" href="{{asset('bs')}}/fontawesome-free/css/all.min.css" rel="stylesheet">
     <link type="text/css" href="{{asset('bs')}}/css/sweetalert2.min.css" rel="stylesheet">
@@ -30,6 +30,14 @@
             font-weight: bold;
             color: #5DEBD7;
             font-size: 22px;
+        }
+
+        .content {
+            margin-top: 60px;
+            padding: 20px;
+            background-color: #f4f6f9;
+            min-height: 100vh;
+            margin-left: 250px;
         }
 
         .sidebar {
@@ -102,14 +110,6 @@
             margin-left: auto;
         }
 
-        .content {
-            margin-top: 60px;
-            margin-left: 250px;
-            padding: 20px;
-            background-color: #f4f6f9;
-            min-height: 100vh;
-        }
-
         .table {
             width: 100%;
             max-width: 100%;
@@ -123,6 +123,38 @@
         .table th {
             word-wrap: break-word;
             white-space: normal;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .header {
+                margin-left: 200px;
+                width: calc(100% - 200px);
+            }
+
+            .content {
+                margin-left: 200px;
+                width: calc(100% - 200px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar {
+                width: 40%;
+            }
+
+            .header {
+                margin-left: 40%;
+                width: 60%;
+            }
+
+            .content {
+                margin-left: 40%;
+                width: 60%;
+            }
         }
     </style>
 </head>
@@ -141,7 +173,7 @@
     @endif
     <div class="layout-wrapper">
         <!-- Sidebar -->
-        <div class="sidebar pt-5">
+        <div class="sidebar pt-5" id="sidebar">
             <div class=" mt-5 pb-3 text-center">
                 <div class="" style="font-weight: bold; color: #5DEBD7; font-size: 22px; text-transform: uppercase;">{{ Auth::user()->level }}</div>
             </div>
@@ -191,6 +223,9 @@
 
         <!-- Header -->
         <div class="header">
+            <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button> -->
             <div class="logo">HaloWarga</div>
             <div class="nav-right">
                 <span>Hi, {{ Auth::user()->nama_petugas }}</span>
@@ -239,6 +274,19 @@
                     document.getElementById('logout-form').submit();
                 }
             });
+        }
+
+        function toggleTeks(tombol) {
+            var lengkap = tombol.parentElement;
+            var teksSisa = lengkap.querySelector('#teks-sisa');
+
+            if(teksSisa.style.display === "none") {
+                teksSisa.style.display = "inline";
+                tombol.innerText = "Sembunyikan";
+            } else {
+                teksSisa.style.display = "none";
+                tombol.innerText =" ...Selengkapnya"
+            }
         }
     </script>
 

@@ -3,11 +3,11 @@
 @section('content')
 <div class="container-fluid ">
     <div class="row align-items-center text-white py-5 mb-5" style="background: #003366">
-        <div class="col-md-6">
+        <div class="col-md-6 slide-text">
             <h1 class="display-4" style="font-weight: bold; font-size: 50px;">Layanan Pengaduan Masyarakat</h1>
             <p class="lead">Sampaikan keluhan Anda dengan mudah dan cepat melalui platform kami.</p>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 slide-img">
             <img src="{{ asset('images/complaint.png') }}" alt="Illustration" class="img-fluid">
         </div>
     </div>
@@ -76,8 +76,8 @@
                     <h5 class="card-title">Kontak Kami</h5>
                     <p class="card-text">Jika Anda membutuhkan bantuan atau memiliki pertanyaan, jangan ragu untuk menghubungi kami.</p>
                     <ul class="list-unstyled">
-                        <li>Email: <a href="mailto:support@pengaduan.com">support@pengaduan.com</a></li>
-                        <li>Telp: <a href="tel:+621234567890">+62 123 456 7890</a></li>
+                        <li>Email: <a href="mailto:ceridzakiyyahnurrahman07@gmail.com">ceridzakiyyahnurrahman07@gmail.com</a></li>
+                        <li>Telp: <a href="tel:+6289691227309">+62 896 9122 7309</a></li>
                     </ul>
                 </div>
             </div>

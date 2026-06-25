@@ -15,10 +15,16 @@ class UserController extends Controller
 
         $query = Pengaduan::where('nik', $user);
 
-        if ($request->has('status') && $request->status != '') {
-            $pengaduan = $query->where('status', $request->status)->get();
-        } else if ($request->has(['start_date', 'end_date'])) {
-            $pengaduan = $query->whereBetween('tgl_pengaduan', [$request->start_date, $request->end_date])->get();
+        if ($request->status != '') {
+            $query->where('status', $request->status);
+        } 
+
+        if ($request->filled('start_date')) {
+            $query->where('tgl_pengaduan', '>=', $request->start_date);
+        }
+
+        if($request->filled('end_date')) {
+            $query->where('tgl_pengaduan', '<=', $request->end_date);
         }
 
         $pengaduan = $query->orderBy('id_pengaduan', 'ASC')->paginate(5);
@@ -67,11 +73,6 @@ class UserController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-    }
-
-    public function pengaduanEdit()
-    {
-
     }
 
     public function pengaduanHapus($id)

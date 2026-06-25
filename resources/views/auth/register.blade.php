@@ -13,18 +13,18 @@
                         @csrf
                         <div class="mb-3">
                         <label for="nik" class="form-label">NIK</label>
-                        <input type="number" class="form-control" id="nik" name="nik" required>
+                        <input type="number" class="form-control" id="nik" name="nik" placeholder="0123456789012345" required>
                         @error('nik')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                         </div>
                         <div class="mb-3">
                             <label for="nama" class="form-label">Nama Lengkap</label>
-                            <input type="text" class="form-control" id="nama" name="nama" required>
+                            <input type="text" class="form-control" id="nama" name="nama" placeholder="John Doe" required>
                         </div>
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" value="{{ old('username') }}" required>
+                            <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" placeholder="johndoe" required>
                             @error('username')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -33,7 +33,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required>
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="johndoe123" required>
                             <small class="text-muted">Password harus lebih dari 8 karakter.</small>
                             @error('password')
                                 <div class="invalid-feedback">
@@ -43,14 +43,14 @@
                         </div>
                         <div class="mb-3">
                             <label for="telp" class="form-label">No Telp</label>
-                            <input type="text" class="form-control @error('telp') is-invalid @enderror" id="telp" name="telp" required>
+                            <input type="text" class="form-control @error('telp') is-invalid @enderror" id="telp" name="telp" placeholder="089123456789" required>
                             @error('telp')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary w-100">Daftar</button>
+                        <button type="submit" class="btn btn-primary w-100">Register</button>
                     </form>
                 </div>
                 <div class="card-footer text-center">

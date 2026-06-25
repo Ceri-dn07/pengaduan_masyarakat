@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HaloWarga-Admin</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('images/icon_complaint.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/logo.png') }}">
     <link type="text/css" href="{{asset('bs')}}/css/bootstrap.min.css" rel="stylesheet">
     <link type="text/css" href="{{asset('bs')}}/fontawesome-free/css/all.min.css" rel="stylesheet">
     <link type="text/css" href="{{asset('bs')}}/css/sweetalert2.min.css" rel="stylesheet">
@@ -127,6 +127,39 @@
         .table th {
             word-wrap: break-word;
             white-space: normal;
+            width: 15%;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .header {
+                margin-left: 200px;
+                width: calc(100% - 200px);
+            }
+
+            .content {
+                margin-left: 200px;
+                width: calc(100% - 200px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar {
+                width: 40%;
+            }
+
+            .header {
+                margin-left: 40%;
+                width: 60%;
+            }
+
+            .content {
+                margin-left: 40%;
+                width: 60%;
+            }
         }
     </style>
 </head>
@@ -273,6 +306,19 @@
                     document.getElementById('logout-form').submit();
                 }
             });
+        }
+
+        function toggleTeks(tombol) {
+            var lengkap = tombol.parentElement;
+            var teksSisa = lengkap.querySelector('#teks-sisa');
+
+            if(teksSisa.style.display === "none") {
+                teksSisa.style.display = "inline";
+                tombol.innerText = "Sembunyikan";
+            } else {
+                teksSisa.style.display = "none";
+                tombol.innerText =" ...Selengkapnya"
+            }
         }
     </script>
 

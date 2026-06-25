@@ -32,7 +32,7 @@ Route::prefix('user')->middleware('auth:masyarakat')->group(function () {
     Route::get('/pengaduan', [UserController::class, 'showPengaduan'])->name('user.pengaduan');
     Route::post('/pengaduan/tambah', [UserController::class, 'pengaduanTambah'])->name('user.pengaduan.tambah');
     Route::put('/pengaduan/edit/{id}', [UserController::class, 'pengaduanEdit'])->name('user.pengaduan.edit');
-    Route::get('/pengaduan/hapus/{id}', [UserController::class, 'pengaduanHapus'])->name('user.pengaduan.hapus');
+    Route::delete('/pengaduan/hapus/{id}', [UserController::class, 'pengaduanHapus'])->name('user.pengaduan.hapus');
     Route::put('/update-profile', [UserController::class, 'updateProfile'])->name('user.updateProfile');
 });
 

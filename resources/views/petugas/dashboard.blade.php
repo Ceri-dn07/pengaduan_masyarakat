@@ -93,7 +93,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Tanggal</th>
-                        <th>NIK</th>
+                        <th>Nama</th>
                         <th>Isi Laporan</th>
                         <th>Status</th>
                         <th>Foto</th>
@@ -104,8 +104,16 @@
                     <tr>
                         <td>{{ $pengaduan->id_pengaduan }}</td>
                         <td>{{ $pengaduan->tgl_pengaduan }}</td>
-                        <td>{{ $pengaduan->nik }}</td>
-                        <td>{{ Str::limit($pengaduan->isi_laporan, 50) }}</td>
+                        <td>{{ $pengaduan->masyarakat->nama }}</td>
+                        <td>
+                            @if(strlen($pengaduan->isi_laporan) > 50)
+                                <span>{{ substr($pengaduan->isi_laporan , 0, 50) }}</span>
+                                <span id="teks-sisa" style="display: none">{{ substr($pengaduan->isi_laporan , 50) }}</span>
+                                <span style="color: #0095f6; cursor: pointer" id="lengkap" onClick="toggleTeks(this)" href="">...Selengkapnya</span>
+                            @else
+                                <span>{{ $pengaduan->isi_laporan }}</span>
+                            @endif
+                        </td>
                         <td>
                             @if ($pengaduan->status == '0')
                                 <span class="badge bg-secondary">Belum diproses</span>

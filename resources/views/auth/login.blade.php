@@ -18,17 +18,17 @@
                         @csrf
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" required>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="johndoe" required>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="johndoe123" required>
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Login</button>
                     </form>
                 </div>
                 <div class="card-footer text-center">
-                    <p>Belum punya akun? <a href="{{ route('register') }}">Daftar</a></p>
+                    <p>Belum punya akun? <a href="{{ route('register') }}">Register</a></p>
                 </div>
             </div>
         </div>

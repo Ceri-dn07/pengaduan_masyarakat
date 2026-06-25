@@ -16,7 +16,6 @@
                     <th>Id Petugas</th>
                     <th>Nama Petugas</th>
                     <th>Username</th>
-                    <th>Password</th>
                     <th>Telp</th>
                     <th>Level</th>
                 </tr>
@@ -28,13 +27,14 @@
                     <td>{{ $p->id_petugas }}</td>
                     <td>{{ $p->nama_petugas }}</td>
                     <td>{{ $p->username }}</td>
-                    <td>{{ $p->password }}</td>
                     <td>{{ $p->telp }}</td>
                     <td>{{ $p->level }}</td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
+        
+        {{ $petugas->links('pagination::bootstrap-5') }}
 
         <!-- Modal Form Tambah Petugas -->
         <div class="modal fade" id="modalPetugas" tabindex="-1" aria-labelledby="modalPetugasLabel" aria-hidden="true">

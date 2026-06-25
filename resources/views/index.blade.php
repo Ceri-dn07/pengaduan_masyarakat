@@ -1,21 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-.card-img-top {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    margin: 0 auto;
-}
-</style>
+
 <div class="container-fluid ">
     <div class="row align-items-center text-white py-5 mb-5" style="background: #003366">
-        <div class="col-md-6">
+        <div class="col-md-6 slide-text">
             <h1 class="display-4" style="font-weight: bold; font-size: 50px;">Layanan Pengaduan Masyarakat</h1>
             <p class="lead">Sampaikan keluhan Anda dengan mudah dan cepat melalui platform kami.</p>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 slide-img">
             <img src="{{ asset('images/complaint.png') }}" alt="Illustration" class="img-fluid">
         </div>
     </div>
@@ -40,7 +33,7 @@
     <div class="row mb-4">
         <div class="col-md-3 mb-4">
             <div class="card shadow">
-                <img src="{{ asset('images/tulis_laporan.png') }}" class="card-img-top" alt="Pengaduan Baru">
+                <img src="{{ asset('images/tulis_laporan.png') }}" alt="Pengaduan Baru">
                 <div class="card-body">
                     <h5 class="card-title text-center">1. Tulis Laporan</h5>
                     <p class="card-text text-center">Tuliskan laporan keluhan Anda dengan jelas</p>
@@ -49,7 +42,7 @@
         </div>
         <div class="col-md-3 mb-4">
             <div class="card shadow">
-                <img src="{{ asset('images/verifikasi.png') }}" class="card-img-top" alt="Pengaduan Proses">
+                <img src="{{ asset('images/verifikasi.png') }}" alt="Pengaduan Proses">
                 <div class="card-body">
                     <h5 class="card-title text-center">2. Proses Verifikasi</h5>
                     <p class="card-text text-center">Tunggu sampai laporan Anda di verifikasi</p>
@@ -58,7 +51,7 @@
         </div>
         <div class="col-md-3 mb-4">
             <div class="card shadow">
-                <img src="{{ asset('images/tindak_lanjut.png') }}" class="card-img-top" alt="Pengaduan Selesai">
+                <img src="{{ asset('images/tindak_lanjut.png') }}" alt="Pengaduan Selesai">
                 <div class="card-body">
                     <h5 class="card-title text-center">3. Tindak Lanjut</h5>
                     <p class="card-text text-center">Laporan Anda sedang dalam tindak lanjut</p>
@@ -67,7 +60,7 @@
         </div>
         <div class="col-md-3 mb-4">
             <div class="card shadow">
-                <img src="{{ asset('images/selesai.png') }}" class="card-img-top" alt="Pengaduan Ditutup">
+                <img src="{{ asset('images/selesai.png') }}" alt="Pengaduan Ditutup">
                 <div class="card-body">
                     <h5 class="card-title text-center">4. Selesai</h5>
                     <p class="card-text text-center">Laporan pengaduan telah selesai ditindak</p>
@@ -84,22 +77,13 @@
                     <h5 class="card-title">Kontak Kami</h5>
                     <p class="card-text">Jika Anda membutuhkan bantuan atau memiliki pertanyaan, jangan ragu untuk menghubungi kami.</p>
                     <ul class="list-unstyled">
-                        <li>Email: <a href="mailto:support@pengaduan.com">support@pengaduan.com</a></li>
-                        <li>Telp: <a href="tel:+621234567890">+62 123 456 7890</a></li>
+                        <li>Email: <a href="mailto:ceridzakiyyahnurrahman07@gmail.com">ceridzakiyyahnurrahman07@gmail.com</a></li>
+                        <li>Telp: <a href="tel:+6289691227309">+62 896 9122 7309</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-    <script>
-    window.onload = function() {
-        const colors = ['#007bff', '#00c6ff', '#28a745', '#ffc107', '#dc3545', '#003366'];
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
-        document.querySelector('.bg-atas').style.backgroundColor = randomColor;
-    };
-</script>
 
 @endsection

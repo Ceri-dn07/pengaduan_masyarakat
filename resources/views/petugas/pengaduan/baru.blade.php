@@ -11,7 +11,7 @@
                     <th>No.</th>
                     <th>Id Pengaduan</th>
                     <th>Tanggal Pengaduan</th>
-                    <th>NIK</th>
+                    <th>Nama</th>
                     <th>Isi Laporan</th>
                     <th>Foto</th>
                     <th>Status</th>
@@ -24,8 +24,16 @@
                     <td>{{ $index + 1}}.</td>
                     <td>{{ $p->id_pengaduan }}</td>
                     <td>{{ $p->tgl_pengaduan }}</td>
-                    <td>{{ $p->nik }}</td>
-                    <td>{{ $p->isi_laporan }}</td>
+                    <td>{{ $p->masyarakat->nama }}</td>
+                    <td>
+                        @if(strlen($p->isi_laporan) > 50)
+                            <span>{{ substr($p->isi_laporan, 0, 50) }}</span>
+                            <span id="teks-sisa" style="display: none">{{ substr($p->isi_laporan, 50)}}</span>
+                            <span style="color: #0095f6; cursor: pointer" id="lengkap" onClick="toggleTeks(this)" href="">...Selengkapnya</span>
+                        @else
+                            <span>{{ $p->isi_laporan }}</span>
+                        @endif
+                    </td>
                     <td>@if($p->foto)
                     <a href="{{ asset('foto_pengaduan') }}/{{($p->foto) }}" target="_blank"><img src="{{ asset('foto_pengaduan/' . $p->foto) }}" alt="Foto Pengaduan" style="width: 50px; height: 50px;"></a>
                         @else
@@ -34,7 +42,7 @@
                     </td>
                     <td>
                         @if ($p->status == '0')
-                            <span class="badge bg-secondary">Belum diproses</span>
+                            <span class="badge bg-secondary text-white">Belum diproses</span>
                         @elseif ($p->status == 'proses')
                             <span class="badge bg-info text-dark">Proses</span>
                         @elseif ($p->status == 'selesai')
